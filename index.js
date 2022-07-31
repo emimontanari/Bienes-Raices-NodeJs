@@ -2,12 +2,15 @@ import express from 'express'
 import csrf from 'csurf'
 import cookieParser from 'cookie-parser'
 import usuarioRoutes from './routes/usuarioRoutes.js'
+import propiedadesRoutes from './routes/propiedadesRoutes.js'
 import db from './config/db.js'
 
 //Crear la app
 const app = express()
+
 //Habilitar la lectura de formularios
 app.use(express.urlencoded({extended:true}))
+
 //Habilitar Cookie Parser
 app.use(cookieParser())
 
@@ -30,10 +33,10 @@ app.use(express.static('public'))
 
 //Routing
 app.use('/auth', usuarioRoutes)
-
+app.use('/', propiedadesRoutes)
 
 //Definir el puerto
-const port =process.env.PORT || 4000
+const port = process.env.PORT || 4000
 app.listen(port, ()=>{
     console.log(`El servidor corriendo en el puerto ${port}`)
 })
